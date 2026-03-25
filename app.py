@@ -10,6 +10,8 @@ from database import setup_database
 from flask import Flask, jsonify
 from blueprint import graphql
 
+from celery import Celery, Task
+
 app = Flask(__name__)
 setup_database(app)
 app.register_blueprint(graphql)
