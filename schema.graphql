@@ -1,10 +1,5 @@
 type Query {
-  works(
-    keyword: String
-    filter: WorksFilter
-    limit: Int
-    offset: Int
-  ): [Work!]!
+  works(input: SearchWorksInput!): [Work!]!
   jobStatus(jobId: ID!): JobStatus!
   book(id: ID!): Book!
 }
@@ -16,6 +11,13 @@ type Mutation {
   ingest(input: IngestWorksInput!): AsynchronousJobResponse!
   ingestReadingList(submissions: [ReadingListSubmissionInput!]!): AsynchronousJobResponse!
   log(input: LogInput): LogResponse!
+}
+
+input SearchWorksInput {
+  keyword: String
+  filter: WorksFilter
+  limit: Int
+  offset: Int
 }
 
 input IngestWorksInput {
