@@ -6,6 +6,7 @@ from typing import Optional, Dict, Any
 from ariadne import QueryType, MutationType, InputType
 from graphql import GraphQLResolveInfo
 from library import Library
+from tasks import ingest
 
 query = QueryType()
 mutation = MutationType()
@@ -16,10 +17,15 @@ def resolve_ingest(
     info: GraphQLResolveInfo,
     input: Dict[str, Any]
 ):
-    lib = Library(tenant_id=info.context.get_tenant_id())
-    result = lib.ingest(author=input.get('author'), subject=input.get('subject'))
+    # lib = Library(tenant_id=info.context.get_tenant_id())
+    # result = lib.ingest(author=input.get('author'), subject=input.get('subject'))
+    result = ingest(
+        tenant_id=info.context.get_tenant_id(),
+        author=input.get('author'),
+        subject=input.get('subject'),
+    )
     return {
-        "jobId": "123",
+        "jobId": result.id,
         "status": "PENDING"
     }
 
