@@ -1,0 +1,139 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2868
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Bold;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}
+{\list\listtemplateid2\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid101\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{hyphen\}}{\leveltext\leveltemplateid102\'01\uc0\u8259 ;}{\levelnumbers;}\fi-360\li1440\lin1440 }{\listname ;}\listid2}
+{\list\listtemplateid3\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid201\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid3}
+{\list\listtemplateid4\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid301\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid4}
+{\list\listtemplateid5\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid401\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid5}
+{\list\listtemplateid6\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid501\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid6}
+{\list\listtemplateid7\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid601\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid7}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}{\listoverride\listid3\listoverridecount0\ls3}{\listoverride\listid4\listoverridecount0\ls4}{\listoverride\listid5\listoverridecount0\ls5}{\listoverride\listid6\listoverridecount0\ls6}{\listoverride\listid7\listoverridecount0\ls7}}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10820\viewh13320\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 Multiple library branches\
+Each with their own catalogues and patrons\
+They need a unified, multi-tenant catalogue service\
+That aggregates book data from Open Library\
+To make it searchable and browsable for library patrons and staff.\
+\
+Aggregate data from open library\
+Make it searchable and browsable \
+For the library patrons and staff\
+For the different library branches.\
+\
+\
+The service:\
+\
+
+\f1\b Catalog ingestion\
+
+\f0\b0 Fetch and store book data from Open Library\'92s public API scoped to individual tenants\
+
+\f1\b \
+Reading list submissions\
+
+\f0\b0 Library patrons can submit personal reading lists (name, email, list of books)\
+Submissions include PII that must be handled carefully\
+\
+Task:\
+\
+Build a multi-tenant catalogue service in Python that ingests books from Open library\
+Provides a local API for searching, browsing and managing submissions\
+All operations should be scoped to a specific tenant\
+\
+\
+Requirements:\
+\
+
+\f1\b Tier 1.\
+
+\f0\b0 \ul \
+Ingestion\
+\pard\tx220\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 \ulnone {\listtext	\uc0\u8226 	}Fetch works from Open Library given an 
+\f1\b author
+\f0\b0  (name or subject)\
+{\listtext	\uc0\u8226 	}Resolve each author\'92s work information\
+{\listtext	\uc0\u8226 	}Store the results locally.\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx220\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li720\fi-720\pardirnatural\partightenfactor0
+\ls2\ilvl0\cf0 {\listtext	\uc0\u8226 	}Each stored book should include: \
+\pard\tx940\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li1440\fi-1440\pardirnatural\partightenfactor0
+\ls2\ilvl1\cf0 {\listtext	\uc0\u8259 	}title,\
+{\listtext	\uc0\u8259 	}author name(s),\
+{\listtext	\uc0\u8259 	}first publish year,\
+{\listtext	\uc0\u8259 	}subjects,\
+{\listtext	\uc0\u8259 	}a cover image URL\
+\pard\tx220\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li720\fi-720\pardirnatural\partightenfactor0
+\ls2\ilvl0\cf0 {\listtext	\uc0\u8226 	}The request may not include all the information. Follow up requests may be required.\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \
+\ul Retrieval\
+\ulnone Expose endpoints to:\
+\pard\tx220\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li720\fi-720\pardirnatural\partightenfactor0
+\ls3\ilvl0\cf0 {\listtext	\uc0\u8226 	}List all stored books with pagination (filter by author, subject, or range)\
+{\listtext	\uc0\u8226 	}Search stored books by keyword (title or author)\
+{\listtext	\uc0\u8226 	}Get a singles book full detail\
+\
+\ls3\ilvl0\ul {\listtext	\'95	}Activity log\
+\ls3\ilvl0\ulnone {\listtext	\'95	}Record every ingestion operation:\
+\pard\tx220\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li720\fi-720\pardirnatural\partightenfactor0
+\cf0 \
+What was requested (author/subject)\
+How many works were fetched \
+How many succeeded or failed\
+The timestamps\
+Any errors encountered\
+\
+Expose this log via an API endpoint.\
+\
+\
+
+\f1\b Tier 2.\
+
+\f0\b0 \ul \
+PII handling\
+\ulnone Expose an endpoint that accepts reading list submissions from patrons:\
+\pard\tx220\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li720\fi-720\pardirnatural\partightenfactor0
+\ls4\ilvl0\cf0 {\listtext	\uc0\u8226 	}Patron\'92s name\
+{\listtext	\uc0\u8226 	}Email address\
+{\listtext	\uc0\u8226 	}List of Open Library work IDs (or IBSNs) representing the books they want to read.\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \
+All PII fields (name, email) but be masked OR hashed.\
+The record should retain enough information to deduplicate submissions by the same patron\
+(.i.e. the same email submitted twice should be recognised without storing the original text)\
+\'85 use bycrpt\
+\pard\tx220\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li720\fi-720\pardirnatural\partightenfactor0
+\cf0 \
+\ul Job Queue and background processing\
+\pard\tx220\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li720\fi-720\pardirnatural\partightenfactor0
+\ls5\ilvl0\cf0 \ulnone {\listtext	\uc0\u8226 	}Ingestion must not block API responses\
+{\listtext	\uc0\u8226 	}Handle errors gracefully\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ul \ulc0 \
+\
+
+\f1\b \ulnone Tier 3.
+\f0\b0 \ul \
+\pard\tx220\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li720\fi-720\pardirnatural\partightenfactor0
+\ls6\ilvl0\cf0 \ulnone \
+\pard\tx220\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li720\fi-720\pardirnatural\partightenfactor0
+\cf0 \ul \ulc0 Version management\
+\pard\tx220\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li720\fi-720\pardirnatural\partightenfactor0
+\ls7\ilvl0\cf0 \ulnone {\listtext	\'95	}When work is re-fetched and the metadata has changed create a new version rather than overwriting\
+{\listtext	\'95	}Track version history per work\
+{\listtext	\'95	}Expose it via API (what has changed and where each version was recorded)\
+{\listtext	\'95	}Handle the case where the data regresses (I.e. a field has been removed)\
+\
+\ls7\ilvl0\ul {\listtext	\'95	}Noisy neighbour throttling\
+\ls7\ilvl0\ulnone {\listtext	\'95	}Prevent any single tenant from monopolising resources\
+{\listtext	\'95	}One usage should not degrade the experience\'85  \
+\
+\
+\
+}

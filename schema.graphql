@@ -1,0 +1,95 @@
+type Query {
+  works(
+    keyword: String
+    filter: WorksFilter
+    limit: Int
+    offset: Int
+  ): [Work!]!
+  jobStatus(jobId: ID!): JobStatus!
+  book(id: ID!): Book!
+}
+
+scalar DateTime
+scalar JSON
+
+type Mutation {
+  ingest(input: IngestWorksInput!): AsynchronousJobResponse!
+  ingestReadingList(submissions: [ReadingListSubmissionInput!]!): AsynchronousJobResponse!
+  log(input: LogInput): LogResponse!
+}
+
+input IngestWorksInput {
+  author: String
+  subject: String
+}
+
+type AsynchronousJobResponse {
+  jobId: ID!
+  status: JobStatus!
+}
+
+input ReadingListSubmissionInput {
+  patronName: String!
+  emailAddress: String!
+  workIdentifiers: [String!]!
+}
+
+input LogInput {
+  operation: LogOperation!
+  metadata: JSON!
+}
+
+enum LogOperation {
+  INGESTION
+}
+
+enum JobStatus {
+  PENDING
+  COMPLETED
+  FAILURE
+}
+
+input WorksFilter {
+  author: String
+  subject: String
+  publishYear: MinMaxRangeInput
+}
+
+input MinMaxRangeInput {
+  min: Int
+  max: Int
+}
+
+interface Work {
+  title: String!
+  author: String!
+  firstPublishYear: Int!
+  subjects: [String!]!
+  coverImageUrl: String
+}
+
+type BookVersion implements Work {
+  versionAt: DateTime!
+  changedFields: [String!]
+  title: String!
+  author: String!
+  firstPublishYear: Int!
+  subjects: [String!]!
+  coverImageUrl: String
+}
+
+type Book implements Work {
+  id: ID!
+  versions: [BookVersion!]!
+  title: String!
+  author: String!
+  firstPublishYear: Int!
+  subjects: [String!]!
+  coverImageUrl: String
+}
+
+type LogResponse {
+  ok: Boolean!
+  message: String
+  loggedAt: DateTime
+}

@@ -1,0 +1,30 @@
+services:
+  api:
+    build: .
+    ports:
+      - "3025:3025"
+    environment:
+      PORT: "3025"
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_HOST: postgres
+      DB_PORT: "5432"
+      DB_NAME: catalogue
+    volumes:
+      - ./:/home/app
+      - api_venv:/home/app/venv
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: catalogue
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
+  api_venv:
