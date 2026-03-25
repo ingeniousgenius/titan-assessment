@@ -1,7 +1,6 @@
 from pathlib import Path
 from ariadne import graphql_sync, make_executable_schema, load_schema_from_path
-from ariadne.constants import PLAYGROUND_HTML
-from ariadne_graphiql import ExplorerGraphiQL
+from ariadne.explorer import ExplorerGraphiQL
 from flask import Blueprint, Request, request, jsonify
 from sqlalchemy.orm import scoped_session
 from dataclasses import dataclass
@@ -21,15 +20,17 @@ DEFAULT_QUERY = """
 """
 
 graphql = Blueprint('graphql', __name__)
+explorer_html = ExplorerGraphiQL(
+    title="Titan banking catalogue service",
+    default_query=DEFAULT_QUERY,
+).html(None)
+
 type_defs = load_schema_from_path("./schema.graphql")
 schema = make_executable_schema(type_defs)
 
 @graphql.route('/', methods=['GET'])
 def playground():
-    return ExplorerGraphiQL(
-        title="Titan banking catalogue service",
-        default_query=DEFAULT_QUERY,
-    ).html(None), 200
+    return explorer_html, 200
 
 @graphql.route('/', methods=['POST'])
 def api():

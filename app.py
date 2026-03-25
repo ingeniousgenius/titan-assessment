@@ -19,7 +19,3 @@ logger = logging.getLogger(__name__)
 @app.route('/health')
 def health():
     return jsonify({'status': 'ok'})
-
-if __name__ == '__main__':
-    PORT = os.environ.get('PORT') or 3025
-    app.run(host="0.0.0.0", port=PORT, debug=True)

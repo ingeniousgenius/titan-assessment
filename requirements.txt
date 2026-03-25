@@ -4,4 +4,3 @@ sqlalchemy
 psycopg2-binary
 alembic
 ariadne
-ariadne-graphiql
