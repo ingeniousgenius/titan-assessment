@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import Any
+from typing import Any, Optional
 
 from sqlalchemy import DateTime as SQLDateTime
 from sqlalchemy import ForeignKey, Index, Integer, String, Text
@@ -49,13 +49,13 @@ class Book(BaseModel):
 
     # Needed to connect reading list submissions (which provide Open Library IDs or ISBNs)
     # back to a stable work record.
-    work_identifier: Mapped[str | None] = mapped_column(String(128), nullable=True, index=True)
+    work_identifier: Mapped[Optional[str]] = mapped_column(String(128), nullable=True, index=True)
 
     title: Mapped[str] = mapped_column(String(255), nullable=False)
     author: Mapped[str] = mapped_column(String(255), nullable=False)
     first_publish_year: Mapped[int] = mapped_column(Integer, nullable=False)
     subjects: Mapped[list[str]] = mapped_column(JSONB, nullable=False, default=list)
-    cover_image_url: Mapped[str | None] = mapped_column(String(255), nullable=True)
+    cover_image_url: Mapped[Optional[str]] = mapped_column(String(255), nullable=True)
 
     created_at: Mapped[datetime] = mapped_column(SQLDateTime(timezone=True), default=datetime.utcnow, nullable=False)
     updated_at: Mapped[datetime] = mapped_column(
@@ -101,7 +101,7 @@ class BookVersion(BaseModel):
     author: Mapped[str] = mapped_column(String(255), nullable=False)
     first_publish_year: Mapped[int] = mapped_column(Integer, nullable=False)
     subjects: Mapped[list[str]] = mapped_column(JSONB, nullable=False, default=list)
-    cover_image_url: Mapped[str | None] = mapped_column(String(255), nullable=True)
+    cover_image_url: Mapped[Optional[str]] = mapped_column(String(255), nullable=True)
 
     book: Mapped["Book"] = relationship(back_populates="versions")
 
@@ -159,6 +159,6 @@ class AsyncJob(BaseModel):
     payload: Mapped[dict[str, Any]] = mapped_column(JSONB, nullable=False, default=dict)
 
     # Optional error message if status becomes FAILURE.
-    error_message: Mapped[str | None] = mapped_column(Text, nullable=True)
+    error_message: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
 
     tenant: Mapped["Tenant"] = relationship(back_populates="jobs")

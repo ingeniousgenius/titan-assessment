@@ -1,3 +1,5 @@
+import os
+
 DB_USER = os.getenv('DB_USER', 'postgres')
 DB_PASS = os.getenv('DB_PASSWORD', 'postgres')
 DB_HOST = os.getenv('DB_HOST', 'localhost')
