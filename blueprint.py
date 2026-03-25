@@ -2,7 +2,6 @@ from pathlib import Path
 from ariadne import graphql_sync, make_executable_schema, load_schema_from_path
 from ariadne.explorer import ExplorerGraphiQL
 from flask import Blueprint, Request, request, jsonify
-from sqlalchemy.orm import scoped_session
 from dataclasses import dataclass
 
 @dataclass
@@ -10,6 +9,8 @@ class GraphQLContext:
     request: Request
     
     def get_tenant_id(self) -> str:
+        if not request.headers.get('X-Tenant-Id'):
+            raise Exception('You must specify a tenant id')
         return self.request.headers.get('X-Tenant-Id', 'default')
 
 DEFAULT_QUERY = """
