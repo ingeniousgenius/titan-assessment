@@ -4,7 +4,7 @@ from ariadne.explorer import ExplorerGraphiQL
 from flask import Blueprint, Request, request, jsonify
 from dataclasses import dataclass
 
-from typedefs import query_type, mutation_type
+from typedefs import query, mutation
 
 @dataclass
 class GraphQLContext:
@@ -29,8 +29,8 @@ explorer_html = ExplorerGraphiQL(
 ).html(None)
 
 type_defs = load_schema_from_path("./schema.graphql")
-schema = make_executable_schema(type_defs, query_type)
-mutation_type.bind_to_schema(schema)
+schema = make_executable_schema(type_defs, query)
+mutation.bind_to_schema(schema)
 
 @graphql.route('/', methods=['GET'])
 def playground():
