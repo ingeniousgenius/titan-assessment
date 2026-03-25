@@ -64,7 +64,7 @@ input MinMaxRangeInput {
 
 interface Work {
   title: String!
-  author: String!
+  author: [String!]!
   firstPublishYear: Int!
   subjects: [String!]!
   coverImageUrl: String
@@ -74,7 +74,7 @@ type BookVersion implements Work {
   versionAt: DateTime!
   changedFields: [String!]
   title: String!
-  author: String!
+  author: [String!]!
   firstPublishYear: Int!
   subjects: [String!]!
   coverImageUrl: String
@@ -84,7 +84,7 @@ type Book implements Work {
   id: ID!
   versions: [BookVersion!]!
   title: String!
-  author: String!
+  author: [String!]!
   firstPublishYear: Int!
   subjects: [String!]!
   coverImageUrl: String

@@ -2,12 +2,26 @@
 GraphQL api type defs and resolvers
 """
 from dataclasses import dataclass
-from typing import Optional
+from typing import Optional, Dict, Any
 from ariadne import QueryType, MutationType, InputType
 from graphql import GraphQLResolveInfo
+from library import Library
 
 query = QueryType()
 mutation = MutationType()
+
+@mutation.field("ingest")
+def resolve_ingest(
+    _,
+    info: GraphQLResolveInfo,
+    input: Dict[str, Any]
+):
+    lib = Library(tenant_id=info.context.get_tenant_id())
+    result = lib.ingest(author=input.get('author'), subject=input.get('subject'))
+    return {
+        "jobId": "123",
+        "status": "PENDING"
+    }
 
 @dataclass
 class MinMaxRangeInput:

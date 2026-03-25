@@ -28,13 +28,6 @@ class Tenant(BaseModel):
     id: Mapped[int] = mapped_column(BigInteger, primary_key=True, autoincrement=True)
     name: Mapped[str] = mapped_column(String(255), nullable=False, unique=True)
 
-    books: Mapped[list["Book"]] = relationship(back_populates="tenant", cascade="all, delete-orphan")
-    logs: Mapped[list["ActivityLog"]] = relationship(
-        back_populates="tenant", cascade="all, delete-orphan"
-    )
-    jobs: Mapped[list["AsyncJob"]] = relationship(back_populates="tenant", cascade="all, delete-orphan")
-
-
 class Book(BaseModel):
     """
     The logical "work" record, used by retrieval and as the parent for version snapshots.
@@ -52,7 +45,7 @@ class Book(BaseModel):
     work_identifier: Mapped[Optional[str]] = mapped_column(String(128), nullable=True, index=True)
 
     title: Mapped[str] = mapped_column(String(255), nullable=False)
-    author: Mapped[str] = mapped_column(String(255), nullable=False)
+    author: Mapped[list[str]] = mapped_column(JSONB, nullable=False)
     first_publish_year: Mapped[int] = mapped_column(Integer, nullable=False)
     subjects: Mapped[list[str]] = mapped_column(JSONB, nullable=False, default=list)
     cover_image_url: Mapped[Optional[str]] = mapped_column(String(255), nullable=True)
@@ -61,9 +54,6 @@ class Book(BaseModel):
     updated_at: Mapped[datetime] = mapped_column(
         SQLDateTime(timezone=True), default=datetime.utcnow, onupdate=datetime.utcnow, nullable=False
     )
-
-    tenant: Mapped["Tenant"] = relationship(back_populates="books")
-    versions: Mapped[list["BookVersion"]] = relationship(back_populates="book", cascade="all, delete-orphan")
 
     __table_args__ = (
         # Common retrieval filters/search should at least be indexable.
@@ -98,12 +88,10 @@ class BookVersion(BaseModel):
 
     # Snapshot fields (copy of Book metadata at the time of ingestion/refetch).
     title: Mapped[str] = mapped_column(String(255), nullable=False)
-    author: Mapped[str] = mapped_column(String(255), nullable=False)
+    author: Mapped[list[str]] = mapped_column(JSONB, nullable=False)
     first_publish_year: Mapped[int] = mapped_column(Integer, nullable=False)
     subjects: Mapped[list[str]] = mapped_column(JSONB, nullable=False, default=list)
     cover_image_url: Mapped[Optional[str]] = mapped_column(String(255), nullable=True)
-
-    book: Mapped["Book"] = relationship(back_populates="versions")
 
     __table_args__ = (
         # Ensure version numbers are unique per book.
@@ -128,9 +116,6 @@ class ActivityLog(BaseModel):
     tenant_id: Mapped[int] = mapped_column(ForeignKey("tenants.id", ondelete="CASCADE"), index=True, nullable=False)
     log_data: Mapped[dict[str, Any]] = mapped_column(JSONB, nullable=False, default={})
     created_at: Mapped[datetime] = mapped_column(SQLDateTime(timezone=True), default=datetime.utcnow, nullable=False)
-
-    tenant: Mapped["Tenant"] = relationship(back_populates="ingestion_logs")
-
 
 class AsyncJob(BaseModel):
     """
@@ -160,5 +145,3 @@ class AsyncJob(BaseModel):
 
     # Optional error message if status becomes FAILURE.
     error_message: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
-
-    tenant: Mapped["Tenant"] = relationship(back_populates="jobs")
